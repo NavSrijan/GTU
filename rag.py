@@ -3,9 +3,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
-from langchain_classic.chains import RetrievalQA # Mention that this is outdated, and will be removed in the future. 
-                                                 # Give students a homework on how they can improve on the RAG pipeline. 
-                                                 # Show them the diagram from the handbook, and the improvement should be on the pipeline.
+from langchain_classic.chains import RetrievalQA 
 
 from llm import create_llm
 
@@ -14,21 +12,21 @@ import os
 
 load_dotenv()
 
-def process_pdf(file_path: str = "./resume.pdf"): # Have students use their own resume, without images or tables. If they do not have one, have them make using Claude
+def process_pdf(file_path: str = "./resume.pdf"): 
     loader = PyPDFLoader(file_path)
     document = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
         chunk_overlap=150
-    ) # Explain the difference between Recursive Character Text Splitter & Character Text Splitter
+    ) 
 
     chunks = splitter.split_documents(document)
 
     return chunks
 
 embeddings = HuggingFaceEmbeddings(
-    model="sentence-transformers/all-MiniLM-L6-v2" # If any dll error occurs, check their python and cmake version. Huggingface token warning can be ignored.
+    model="sentence-transformers/all-MiniLM-L6-v2" 
 )
 
 vector_store = Chroma(
@@ -42,7 +40,6 @@ def ingest_data():
     vector_store.add_documents(chunks)
 
     return "Data ingestion completed." # Check if vector_db folder has been created or not. 
-                                       # It should have a sqlite file and collection folder. If any is missing the run has failed.
 
 def rag_chain(query: str):
     llm = create_llm()

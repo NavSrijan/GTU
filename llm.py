@@ -18,7 +18,4 @@ if __name__ == "__main__":
     llm = create_llm()
     response = llm.invoke(user_input)
 
-    # print("\n\n\nRESPONSE\n\n\n", response) # Then uncomment this line, it will show you the full response. 
-                                            # Ask students what arguments they spot in the output
-
     print("\n\n\nCLEAN RESPONSE\n\n\n", response.content) # First Show the clean response
