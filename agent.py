@@ -28,5 +28,5 @@ def run_agent(job_title: str, salary: str):
     return response["messages"][-1].content
 
 
-    if __name__ == '__main__':
-        response = run_agent("Python", 320000)
+if __name__ == '__main__':
+    response = run_agent("Python", 320000)
