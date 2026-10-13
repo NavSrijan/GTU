@@ -2,9 +2,11 @@ from langchain_community.tools import DuckDuckGoSearchRun
 import requests
 import os
 from dotenv import load_dotenv
+from langchain_core.tools import tool
 
 load_dotenv()
 
+@tool
 def get_job_recommendations(what: str, salary_min: int) -> str:
     """
     Searches live Indian job listings (Adzuna) by keyword and minimum
@@ -39,5 +41,6 @@ if __name__ == '__main__':
     # result = web_search_tool.invoke("LA 2028 Olympics")
     # print(result)
 
-    result = get_job_recommendations("Data Analyst", 300000)
+    # result = get_job_recommendations("Data Analyst", 300000)
+    result = get_job_recommendations.invoke({"what": "Data Analyst", "salary_min": 300000})
     print(result)
