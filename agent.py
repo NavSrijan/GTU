@@ -25,7 +25,8 @@ def run_agent(job_title: str, salary: str):
     response = job_search_agent.invoke(
         {"messages": [{"role": "user", "content": user_prompt}]}
     )
-    print(response)
+    # print(response)
+    print(response["messages"][-1].content)
     return response["messages"][-1].content
 
 def deploy_agent():
